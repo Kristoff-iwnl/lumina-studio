@@ -1,32 +1,57 @@
 # SQLite Backup & Restore Guide
 
-## 1. Safety & Architecture
-LUMINA uses SQLite stored at `instance/app.db`. Because SQLite is a file-based database, backing up and restoring is simple, fast, and does not require complex database server daemons.
+## 1. Database Location
 
-## 2. Backup Procedure (Safe Online Backup)
-To create a safe backup of the active SQLite database while the application is running (without locking or stopping the server):
+LUMINA uses SQLite as its default database.
 
-```bash
-# Using SQLite command-line tool
-sqlite3 instance/app.db ".backup instance/app_backup_$(date +%Y%m%d_%H%M%S).db"
+The default database location, relative to the repository root, is:
+
+```text
+lumina/instance/lumina.db
 ```
 
-Alternatively, you can copy the database file directly when no write transactions are active:
+If `DATABASE_URL` is configured through an environment variable, the application will use that database location instead.
+
+## 2. Creating a Backup
+
+SQLite provides a backup command that can safely create a consistent backup while the database is in use.
+
+Run this from the repository root:
+
 ```bash
-cp instance/app.db instance/app_backup.db
+sqlite3 lumina/instance/lumina.db ".backup 'lumina/instance/lumina_backup.db'"
 ```
 
-## 3. Restore Procedure
-To restore the database from a backup file:
+For a timestamped backup:
+
 ```bash
-# Stop the application server
-# Replace active database with backup
-cp instance/app_backup.db instance/app.db
-# Restart the application server
+sqlite3 lumina/instance/lumina.db ".backup 'lumina/instance/lumina_backup_$(date +%Y%m%d_%H%M%S).db'"
 ```
 
-## 4. Hosting Note (Ephemeral Filesystem Warning)
-**Warning for Render Free Tier / Ephemeral Hosts:**
-Render and similar free-tier hosting providers use ephemeral filesystems. Any local changes made to SQLite (`instance/app.db`) — such as admin edits or client enquiries — may be reset on server restarts or redeploys. 
-- For permanent production workloads, configure a persistent disk mount on Render or migrate to PostgreSQL (`DATABASE_URL=postgresql://...`).
-- When running in `DEMO_MODE=true`, sample data and demo enquiries are automatically re-seeded on startup if the database is empty.
+Keep backups somewhere safe and separate from the live application.
+
+Do not commit database files or backups to the public GitHub repository.
+
+## 3. Restoring a Backup
+
+Before restoring:
+
+1. Stop or temporarily disable the application.
+2. Keep a copy of the current database in case the restore needs to be reversed.
+3. Verify that the backup file is valid.
+
+Restore the backup from the repository root:
+
+```bash
+cp lumina/instance/lumina_backup.db lumina/instance/lumina.db
+```
+
+Restart the application and verify that the website and admin dashboard work correctly.
+
+## 4. Hosting Considerations
+
+Some free hosting providers use ephemeral filesystems. Database changes stored locally may be lost when the service restarts or redeploys.
+
+For persistent production workloads, use a persistent disk or a managed database such as PostgreSQL.
+
+If deploying on an ephemeral filesystem, do not rely on the local SQLite database as permanent storage.
