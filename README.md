@@ -2,7 +2,7 @@
 
 A Flask-powered photography studio website featuring an immersive cinematic frontend, client enquiry system, and a dedicated admin dashboard for managing studio content and enquiries.
 
-**Live Website:** [lumina.pythonanywhere.com](https://Kristoff.pythonanywhere.com)  
+**Live Website:** [Kristoff.pythonanywhere.com](https://Kristoff.pythonanywhere.com)  
 **Source Code:** [GitHub Repository](https://github.com/Kristoff-iwnl/lumina-studio)
 
 ---
