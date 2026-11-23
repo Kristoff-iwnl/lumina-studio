@@ -1,101 +1,182 @@
-# LUMINA — Cinematic Photography Studio & Admin Hub
+# LUMINA — Cinematic Photography Studio
 
-A production-grade Flask web application for a photography studio featuring a high-end cinematic public frontend, a secure Signal admin login, and a Capitalio-inspired admin dashboard with real-time SQLite ORM management.
+A Flask-powered photography studio website featuring an immersive cinematic frontend, client enquiry system, and a dedicated admin dashboard for managing studio content and enquiries.
 
-> *Note: This is a production-ready demo concept built for professional photography studios.*
-
-## 🌟 Live Demo & Preview
-- **Live Demo / Repository:** [GitHub Repository — Kristoff-iwnl/lumina-studio](https://github.com/Kristoff-iwnl/lumina-studio)
-- **Admin Login:** `/auth/login?variant=signal` (Credentials: `admin@lumina.com` / `Admin123`)
+**Live Website:** [lumina.pythonanywhere.com](https://Kristoff.pythonanywhere.com)  
+**Source Code:** [GitHub Repository](https://github.com/Kristoff-iwnl/lumina-studio)
 
 ---
 
-## ✨ Features
-- **Dual Public Frontend:**
-  - **Cinematic Variant (Default):** Interactive scroll engine, video background, and immersive visual storytelling.
-  - **Classic Variant:** Clean, traditional photography studio landing page.
-- **Client Enquiry System:** Honeypot bot protection, time-trap validation, rate-limiting (`flask-limiter`), and optional email notifications (`flask-mail`).
-- **Secure Authentication & Admin Hub:**
-  - Signal admin login variant with local/CloudFront falcon video stream.
-  - Capitalio Shadcn-inspired admin dashboard with real-time enquiry stats, client avatars, recent submissions table, and management hubs (Services, FAQs, Testimonials, Enquiries).
-- **Security & Compliance:** Strict Content Security Policy (CSP), CSRF protection (`Flask-WTF`), HTTPOnly/Secure cookies, ProxyFix support, and HSTS headers.
+## Preview
+
+### Homepage
+
+![LUMINA Homepage](docs/home.png)
+
+### Gallery
+
+A closer look at the website's visual design and interface.
+
+![Gallery Preview 1](docs/gallery/gallery-01.png)
+
+![Gallery Preview 2](docs/gallery/gallery-02.png)
+
+![Gallery Preview 3](docs/gallery/gallery-03.png)
+
+### Admin Dashboard
+
+![Admin Dashboard](docs/admin-dashboard.png)
 
 ---
 
-## 🛠️ Tech Stack
-- **Backend:** Python 3.12, Flask 3.x, Flask-SQLAlchemy, Flask-Migrate, Flask-Login, Flask-Limiter
-- **Database:** SQLite (`instance/app.db`)
-- **Frontend:** Vanilla JS, CSS3, Custom Glassmorphism UI
-- **Testing:** Pytest (47 comprehensive tests)
+## Features
+
+- **Cinematic Frontend:** Immersive visual experience with interactive scrolling and video backgrounds.
+- **Alternative Classic Frontend:** A more traditional photography studio website layout.
+- **Client Enquiry System:** Contact and enquiry submissions with honeypot protection, time-trap validation, and rate limiting.
+- **Admin Authentication:** Dedicated admin login with session-based authentication.
+- **Admin Dashboard:** Manage enquiries, services, FAQs, and testimonials.
+- **Dashboard Insights:** Enquiry statistics, recent submissions, and management overview.
+- **Security:** CSRF protection, Content Security Policy, secure cookie settings, and HTTP security headers.
+- **Email Notifications:** Optional email notifications for new enquiries.
 
 ---
 
-## 🚀 Quick Start (Local Development)
+## Tech Stack
 
-### 1. Clone & Setup Virtual Environment
+| Layer | Technologies |
+|---|---|
+| Backend | Python 3.12, Flask 2.3.3 |
+| Database | SQLite, Flask-SQLAlchemy |
+| Migrations | Flask-Migrate |
+| Authentication | Flask-Login |
+| Security | Flask-WTF, Flask-Limiter |
+| Frontend | HTML5, CSS3, Vanilla JavaScript |
+| Testing | Pytest |
+
+---
+
+## Run Locally
+
+### 1. Clone the repository
+
 ```bash
 git clone https://github.com/Kristoff-iwnl/lumina-studio.git
 cd lumina-studio
+```
+
+### 2. Create a virtual environment
+
+```bash
 python -m venv venv
-# On Windows:
+```
+
+Activate it:
+
+**Windows**
+```bash
 venv\Scripts\activate
-# On macOS / Linux:
+```
+
+**macOS / Linux**
+```bash
 source venv/bin/activate
 ```
 
-### 2. Install Dependencies
+### 3. Install dependencies
+
 ```bash
 pip install -r lumina/requirements.txt
 pip install -r lumina/requirements-dev.txt
 ```
 
-### 3. Initialize Database & Create Admin
+### 4. Configure the application
+
+Set the required environment variables before running the application.
+
+At minimum, configure a secure `SECRET_KEY` for production and set `APP_ENV` appropriately.
+
+### 5. Initialize the database
+
 ```bash
 cd lumina
 flask --app wsgi db upgrade
+```
+
+### 6. Create an admin account
+
+```bash
 flask --app wsgi create-admin
 ```
 
-### 4. Run Development Server
+Follow the prompts to create your own admin credentials.
+
+### 7. Start the application
+
 ```bash
 python wsgi.py
 ```
-Open [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
+
+Open the website at:
+
+[http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ---
 
-## 📋 Environment Variables
+## Testing
 
-| Variable | Default | Description |
-|---|---|---|
-| `FLASK_ENV` | `development` | Flask environment mode (`development` vs `production`). |
-| `APP_ENV` | `development` | Application environment mode. |
-| `SECRET_KEY` | `dev-key-...` | Cryptographic signing key (Required in production: ≥ 32 chars). |
-| `DATABASE_URL` | `sqlite:///instance/app.db` | SQLite database URI. |
-| `FRONTEND_VARIANT` | `cinematic` | Default public website variant (`cinematic` vs `classic`). |
-| `ADMIN_LOGIN_VARIANT` | `signal` | Admin login variant (`signal` vs `classic`). |
-| `DEMO_MODE` | `false` | Enables read-only demo mode with sample data and banner. |
-| `TRUSTED_PROXY_COUNT` | `1` | Number of proxy headers to trust for IP rate limiting and HTTPS scheme detection. |
-| `SITE_URL` | `http://127.0.0.1:5000` | Canonical site URL for sitemap, robots.txt, and Open Graph tags. |
+Run the automated test suite from the repository root:
 
----
-
-## 🧪 Running Tests
 ```bash
 pytest lumina/tests/
 ```
 
 ---
 
-## 📦 Deployment Guides
-- [Deploying to PythonAnywhere (Free Tier)](docs/DEPLOY_PYTHONANYWHERE.md)
-- [Deploying to Render (Free Tier)](docs/DEPLOY_RENDER.md)
-- [Pre-Deploy Checklist](docs/PRE_DEPLOY_CHECKLIST.md)
-- [SQLite Backup & Restore Guide](docs/BACKUP.md)
+## Deployment Documentation
+
+Additional deployment and maintenance guides are available in the `docs/` directory:
+
+- [PythonAnywhere Deployment](docs/DEPLOY_PYTHONANYWHERE.md)
+- [Render Deployment](docs/DEPLOY_RENDER.md)
+- [Pre-Deployment Checklist](docs/PRE_DEPLOY_CHECKLIST.md)
+- [SQLite Backup & Restore](docs/BACKUP.md)
 
 ---
 
-## 📝 Credits & Assets
-- **Fonts:** Ogg Text & Inter (Licensed / CDN)
-- **Cinematic Assets & Icons:** Figma & CloudFront CDN
-- **Background Video:** Fictional promotional video stream (Verified / Demo)
+## Project Structure
+
+```text
+lumina-studio/
+├── docs/
+│   ├── gallery/
+│   ├── home.png
+│   ├── admin-dashboard.png
+│   └── deployment guides
+├── lumina/
+│   ├── app/
+│   ├── config/
+│   ├── instance/
+│   ├── migrations/
+│   ├── tests/
+│   ├── requirements.txt
+│   └── wsgi.py
+└── README.md
+```
+
+---
+
+## Notes
+
+- The live website is a demonstration deployment.
+- Admin access requires credentials created by the administrator.
+- Never commit production secrets, database credentials, or private configuration files to the repository.
+- For production deployments, use a persistent database and configure environment variables securely.
+
+---
+
+## Credits
+
+- Fonts: Ogg Text and Inter
+- Visual assets and icons: Figma and CloudFront CDN
+- Frontend implementation: Custom HTML, CSS, and JavaScript
