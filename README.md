@@ -11,7 +11,7 @@ A Flask-powered photography studio website featuring an immersive cinematic fron
 
 ### Homepage
 
-![LUMINA Homepage](docs/home.png)
+![LUMINA Homepage](docs/homepage.png)
 
 ### Gallery
 
@@ -22,6 +22,9 @@ A closer look at the website's visual design and interface.
 ![Gallery Preview 2](docs/gallery/gallery-02.png)
 
 ![Gallery Preview 3](docs/gallery/gallery-03.png)
+
+![Gallery Preview 4](docs/gallery/gallery-04.png)
+
 
 ### Admin Dashboard
 
