@@ -5,7 +5,7 @@ A production-grade Flask web application for a photography studio featuring a hi
 > *Note: This is a production-ready demo concept built for professional photography studios.*
 
 ## 🌟 Live Demo & Preview
-- **Live Demo:** [Placeholder Link](http://127.0.0.1:5000)
+- **Live Demo / Repository:** [GitHub Repository — Kristoff-iwnl/lumina-studio](https://github.com/Kristoff-iwnl/lumina-studio)
 - **Admin Login:** `/auth/login?variant=signal` (Credentials: `admin@lumina.com` / `Admin123`)
 
 ---
