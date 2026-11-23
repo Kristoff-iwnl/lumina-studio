@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+<div class="login-wrapper">
+    <div class="login-card">
+        <h1>Admin Login</h1>
+        <p>Enter your credentials to access the admin dashboard</p>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" class="login-form">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                {{ form.email.label }}
+                {{ form.email(size=32, autofocus=True) }}
+                {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                        <span class="error-message">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.password.label }}
+                {{ form.password(size=32) }}
+                {% if form.password.errors %}
+                    {% for error in form.password.errors %}
+                        <span class="error-message">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="checkbox-group">
+                {{ form.remember_me() }}
+                {{ form.remember_me.label }}
+            </div>
+
+            {{ form.submit(class="submit-button") }}
+        </form>
+
+        <div class="login-back">
+            <a href="{{ url_for('public.index') }}">← Back to Site</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

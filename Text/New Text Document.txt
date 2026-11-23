@@ -1,0 +1,80 @@
+Prompt 1: storefront spacing, lag and a new look
+
+# CONTEXT
+This repo is an existing Flask small-business website: a public single-page storefront at / and an admin area. Sections, order, content, config/site.json, backend, auth and tests stay as they are. This task is front-end only: fix spacing, fix lag, and give the site a new visual identity on the same blueprint.
+
+# STEP 0: AUDIT BEFORE CHANGING ANYTHING (write findings to docs/AUDIT.md, then continue without waiting)
+1. Run the app and the test suite. Record the pass count.
+2. Take full-page screenshots of / at 360, 768, 1280 and 1920 px (Playwright). Save them to docs/before/.
+3. Measure and list section padding, gaps between heading, paragraph and cards, container widths, and every section whose spacing differs from the others. Look closely at "How it works".
+4. Profile in Chrome DevTools Performance with 6x CPU slowdown while scrolling the whole page and moving the mouse over the hero. List frame rate, long tasks over 50 ms, forced layouts and the five most expensive paint or composite items. Also check: how many backdrop-filter elements are visible at once and their blur radius, any animated blurred or gradient layers, animated properties other than transform and opacity, the Three.js loop (pixel ratio, antialias, geometry count, whether it renders while off-screen), unthrottled scroll or mousemove listeners, and will-change overuse.
+5. Put a short table in docs/AUDIT.md: problem, evidence, planned fix.
+
+# FIX 1: SPACING SYSTEM
+- Define spacing tokens on an 8px scale (--space-1 to --space-10) and use them everywhere. No ad hoc margins.
+- Section vertical padding: clamp(4rem, 8vw, 8rem), identical for every section (hero excepted).
+- One container width (max 1120px) and one side padding (clamp(1.25rem, 4vw, 2rem)). Each section heading block uses fixed gaps: eyebrow, heading, intro, content.
+- "How it works": equal-height step cards in a CSS grid (3 columns on desktop, 1 on mobile), consistent number size, aligned baselines, no orphaned card at any width from 320 to 1920 px. If you add a connector line, it must never break.
+- Fluid type with clamp, paragraphs 60-70ch wide, scroll-margin-top so anchors never hide under the sticky header.
+- Fix double margins between stacked components and anything touching the edge at 320 px.
+
+# FIX 2: LAG
+Target: steady 60 fps on a mid-range laptop and no long tasks over 50 ms while scrolling. In order of impact:
+- At most 3 small backdrop-filter elements visible at once (header plus one or two cards), blur radius 12px or less. All other "glass" uses a translucent background, a 1px border and a subtle inner gradient.
+- No animated filter: blur on large layers. The background glow is static, or moves with a very slow transform-only animation on a single pre-painted layer.
+- Animate only transform and opacity. Replace animations of box-shadow, width, height, top, left, filter and background-position. Use will-change only while an element is animating.
+- Replace scroll listeners with IntersectionObserver (reveal once, then unobserve). Throttle mousemove with requestAnimationFrame.
+- Three.js: pixel ratio min(devicePixelRatio, 1.5), antialias off on touch devices, fewer geometry segments, shared geometries and materials, no per-frame allocations, render only while the hero is visible and the tab is active, cap at 60 fps, dispose cleanly. Add an automatic low-quality mode (static render) when the rolling FPS stays under 40 for 2 seconds.
+- Preload fonts, defer non-critical JS, give images explicit width and height, keep CLS under 0.05.
+- Add a dev-only FPS counter enabled with ?fps=1.
+
+# NEW DESIGN (same blueprint, new identity)
+Keep the section order, content, copy structure, 3D-hero concept and subtle-motion philosophy. Change the visual language to direction [A / B / C: default A]:
+A) Warm editorial luxury: warm near-black (#0f0d0c), ivory text (#f4efe6), one champagne-gold accent (#c8a96b), serif display font with a clean sans for text, hairline borders, restrained glass, faint grain. 3D in brushed gold and glass.
+B) Light frosted aurora: off-white (#f6f7fb) base with a soft lavender, sky and peach gradient mesh, frosted white glass cards, deep navy text, one saturated indigo accent, rounded geometric sans. 3D in pearly pastel.
+C) Midnight emerald: deep green-black (#07110e), mint accent (#34d399) with warm sand as secondary, geometric sans with monospaced details, sharper 8px radius.
+Implement the identity entirely through CSS custom properties in one tokens file (colours, type, radius, borders, shadows, glass recipe, button and hover styles), so a new client theme only needs new tokens and config. Update the 3D scene colours and materials to match. Fonts must be open-licence (SIL OFL) and self-hosted. No more than two accent hues. Every section has one clear focal point.
+
+# CONSTRAINTS
+- Front-end only. Do not change models, routes, auth, form field names or backend behaviour. Existing tests must pass. Edit tests only where the markup changed.
+- No new dependencies without asking.
+- Accessibility: AA contrast, visible focus, full keyboard use, reduced-motion fallback.
+- Lighthouse mobile 90 or higher in all four categories.
+
+# DELIVERABLES
+docs/AUDIT.md, docs/before/ and docs/after/ screenshots at the four widths, a before/after table (fps, long tasks, Lighthouse, CLS), DECISIONS.md updated, and a list of changed files. Stop and wait for my review.
+
+
+
+
+
+
+Prompt 2: admin login page
+
+
+# CONTEXT
+Flask app. The admin login at /auth/login looks janky and unprofessional. Fix the visuals and UX only. Do not change auth logic, route names, form field names, CSRF, rate limiting or session behaviour. Existing tests must pass. Reuse the shared design tokens file from the storefront (no duplicate colours or fonts).
+
+# STEP 0: AUDIT
+Screenshot the login page at 360, 768 and 1280 px in these states: empty, field focused, wrong password, rate-limited, and a very long error message. List everything that is broken: alignment, spacing, input and button styling, error display, fonts, overflow on small screens, autofill colours, double-submit. Save to docs/before/login-*.png and note the findings in docs/AUDIT.md.
+
+# DESIGN
+- Full-viewport layout with a centred card (max-width 420px, fluid padding). Same background language as the public site, a small brand mark, an "Admin sign in" heading, and a "Back to site" link.
+- Visible labels, not placeholders alone. 48px-tall inputs, consistent radius, a clear focus ring. autocomplete="username" and "current-password", autofocus on the first field.
+- Password show/hide button (aria-pressed, no layout shift).
+- A full-width primary button that disables and shows "Signing in..." while submitting, with a no-JS fallback.
+- Errors: an inline alert area above the form (role="alert") with an icon so colour is not the only cue, plus field-level invalid states. Keep the message generic ("Incorrect username or password"). For rate limiting, show a clear message with the wait time if available.
+- Fix :-webkit-autofill styling on dark backgrounds.
+- Responsive: no horizontal scroll at 320 px, and the submit button is never hidden by the mobile keyboard.
+- Motion: a tiny fade and rise on the card only. backdrop-filter on the card at most. Respect prefers-reduced-motion.
+- Accessibility: AA contrast, correct label associations, aria-describedby for errors, sensible focus order, page title "Admin sign in".
+- Apply the same tokens lightly to the rest of the admin shell (header, buttons, tables, form inputs) for consistency, with no structural changes.
+
+# SECURITY
+Strict CSP stays: no inline scripts or styles, use the existing static JS module. Nothing new is logged. Do not expose the password in the DOM beyond the toggle.
+
+# TESTS
+Existing tests pass. Add tests that: the login page has labelled username and password fields and a CSRF token, a failed login shows the generic error without revealing which field was wrong, form field names are unchanged, and the response has no inline scripts. Save after-screenshots to docs/after/login-*.png.
+
+# DELIVERABLES
+Changed files list, before/after screenshots, test output, and any decision recorded in DECISIONS.md. Stop and wait for my review.

@@ -1,0 +1,198 @@
+.site-shell {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.below-sections {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 100px 20px 80px;
+  z-index: 20;
+}
+
+.below-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-heading {
+  font-family: "Ogg Medium", serif;
+  font-size: 3.2rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section-subheading {
+  text-align: center;
+  color: #444;
+  font-size: 1.1rem;
+  margin-bottom: 4rem;
+}
+
+/* Services / Sights alternative grid or features */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 5rem;
+}
+
+.service-card {
+  background: #fff;
+  border: 1px solid rgba(17, 20, 17, 0.12);
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 0 12px 36px var(--shadow);
+}
+
+.service-card h3 {
+  font-family: "Ogg Medium", serif;
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--ink);
+}
+
+.service-card p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.service-price {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--ink);
+}
+
+/* Enquiry Form */
+.enquiry-section {
+  background: #fff;
+  border-radius: 24px;
+  padding: 60px;
+  box-shadow: 0 20px 60px var(--shadow);
+  margin-bottom: 5rem;
+}
+
+.form-group {
+  margin-bottom: 1.8rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  color: var(--ink);
+}
+
+.form-control {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid rgba(17, 20, 17, 0.2);
+  border-radius: 12px;
+  font-size: 1rem;
+  background: #fcfcfc;
+  color: var(--ink);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--ink);
+  background: #fff;
+}
+
+.btn-primary-cream {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 32px;
+  border-radius: 999px;
+  color: var(--paper);
+  background: var(--ink);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 12px 30px var(--shadow);
+  transition: transform 0.2s ease;
+}
+
+.btn-primary-cream:hover {
+  transform: translateY(-2px);
+}
+
+/* FAQ Accordion */
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto 5rem;
+}
+
+.faq-item {
+  background: #fff;
+  border: 1px solid rgba(17, 20, 17, 0.1);
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.faq-question {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.faq-answer {
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Testimonials */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 5rem;
+}
+
+.testimonial-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px var(--shadow);
+  border: 1px solid rgba(17, 20, 17, 0.08);
+}
+
+.testimonial-quote {
+  font-style: italic;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.testimonial-author {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.testimonial-role {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* Footer below */
+.footer-below {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 60px 20px 40px;
+  text-align: center;
+}
+
+.footer-below a {
+  color: var(--paper);
+  text-decoration: underline;
+}

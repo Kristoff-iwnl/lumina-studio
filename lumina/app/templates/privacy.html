@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy — {{ config.get('business', {}).get('name', 'LUMINA') }}{% endblock %}
+
+{% block content %}
+
+<section class="container" style="max-width: 800px; padding-top: 80px;">
+    <h2>Privacy Policy</h2>
+
+    <h3 style="color: var(--light); margin-top: 2rem;">What Data We Collect</h3>
+    <p>When you submit an enquiry through our website, we collect the following information:</p>
+    <ul style="list-style-position: inside; color: var(--text-muted); margin-bottom: 1.5rem;">
+        <li>Your full name (required)</li>
+        <li>Your email address or phone number (at least one required)</li>
+        <li>Your message or project description (required)</li>
+        <li>Optionally: service interest and preferred date</li>
+    </ul>
+
+    <h3 style="color: var(--light); margin-top: 2rem;">How We Use Your Data</h3>
+    <p>We use this information solely to:</p>
+    <ul style="list-style-position: inside; color: var(--text-muted); margin-bottom: 1.5rem;">
+        <li>Respond to your enquiry</li>
+        <li>Provide the service you requested</li>
+        <li>Send you updates related to your project (if you opt in)</li>
+        <li>Improve our services based on feedback</li>
+    </ul>
+
+    <h3 style="color: var(--light); margin-top: 2rem;">Data Retention</h3>
+    <p>We retain enquiry data for 12 months unless you request deletion sooner. After this period, your data is permanently deleted from our systems.</p>
+
+    <h3 style="color: var(--light); margin-top: 2rem;">Your Rights</h3>
+    <p>Under data protection regulations, you have the right to:</p>
+    <ul style="list-style-position: inside; color: var(--text-muted); margin-bottom: 1.5rem;">
+        <li>Request access to your personal data</li>
+        <li>Correct inaccurate or incomplete data</li>
+        <li>Request deletion of your data</li>
+        <li>Object to processing of your data</li>
+        <li>Request a copy of your data in a portable format</li>
+    </ul>
+
+    <p>To exercise any of these rights, contact us at <a href="mailto:{{ config.get('business', {}).get('email', '') }}">{{ config.get('business', {}).get('email', '') }}</a>.</p>
+
+    <h3 style="color: var(--light); margin-top: 2rem;">Security</h3>
+    <p>We take the security of your data seriously. All enquiry data is stored in a secure database with encryption. We do not share your information with third parties except as required by law.</p>
+
+    <h3 style="color: var(--light); margin-top: 2rem;">Cookies</h3>
+    <p>This website uses session cookies only, which are essential for functionality and security. We do not use tracking cookies or third-party analytics.</p>
+
+    <h3 style="color: var(--light); margin-top: 2rem;">Third-Party Remote Assets (Cinematic Variant)</h3>
+    <p>When viewing the cinematic front-end variant, your browser directly requests assets (fonts, scene photographs, and icons) from third-party content delivery networks and domains: <code>raft-blast-61784561.figma.site</code>, <code>d8j0ntlcm91z4.cloudfront.net</code>, and <code>dcym8fthxf5uu.cloudfront.net</code>. These third parties may log your IP address and request headers in accordance with their respective privacy policies.</p>
+
+    <h3 style="color: var(--light); margin-top: 2rem;">Contact Us</h3>
+    <p>If you have questions about our privacy practices or wish to exercise your rights, please contact us:</p>
+    <p>
+        <strong>{{ config.get('business', {}).get('name', 'LUMINA') }}</strong><br>
+        📧 {{ config.get('business', {}).get('email', '') }}<br>
+        📞 {{ config.get('business', {}).get('phone', '') }}
+    </p>
+
+    <p style="margin-top: 3rem; color: var(--text-muted); font-size: 0.9rem;">Last updated: October 2026</p>
+</section>
+
+{% endblock %}

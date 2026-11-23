@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Enquiries — Admin{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+
+<section class="container" style="padding-top: 80px; padding-bottom: 100px;">
+    <div class="admin-header">
+        <h1>Enquiries</h1>
+    </div>
+
+    <!-- Filters -->
+    <form method="GET" class="filters">
+        <select name="status">
+            <option value="">All Status</option>
+            <option value="new" {% if status == 'new' %}selected{% endif %}>New</option>
+            <option value="contacted" {% if status == 'contacted' %}selected{% endif %}>Contacted</option>
+            <option value="done" {% if status == 'done' %}selected{% endif %}>Done</option>
+            <option value="spam" {% if status == 'spam' %}selected{% endif %}>Spam</option>
+        </select>
+
+        <input type="text" name="search" placeholder="Search by name, email, or phone..." value="{{ search }}">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <!-- Table -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>Service</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for enquiry in enquiries.items %}
+                <tr>
+                    <td>#{{ enquiry.id }}</td>
+                    <td><strong>{{ enquiry.name }}</strong></td>
+                    <td>
+                        {% if enquiry.email %}
+                            <a href="mailto:{{ enquiry.email }}">{{ enquiry.email }}</a>
+                        {% elif enquiry.phone %}
+                            <a href="tel:{{ enquiry.phone }}">{{ enquiry.phone }}</a>
+                        {% endif %}
+                    </td>
+                    <td>{{ enquiry.service or '—' }}</td>
+                    <td><span class="badge badge-{{ enquiry.status }}">{{ enquiry.status }}</span></td>
+                    <td>{{ enquiry.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td><a href="{{ url_for('admin.view_enquiry', enquiry_id=enquiry.id) }}" class="btn-edit btn-sm">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    {% if enquiries.pages > 1 %}
+        <div class="pagination">
+            {% if enquiries.has_prev %}
+                <a href="{{ url_for('admin.enquiries_list', page=enquiries.prev_num, status=status, search=search) }}">← Previous</a>
+            {% endif %}
+
+            <span>Page {{ enquiries.page }} of {{ enquiries.pages }}</span>
+
+            {% if enquiries.has_next %}
+                <a href="{{ url_for('admin.enquiries_list', page=enquiries.next_num, status=status, search=search) }}">Next →</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</section>
+
+{% endblock %}

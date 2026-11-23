@@ -1,0 +1,232 @@
+{
+  "business": {
+    "name": "LUMINA",
+    "tagline": "Light. Craft. Memory.",
+    "description": "Premium photography studio specializing in portraits, events, and product photography.",
+    "email": "hello@lumina.studio",
+    "phone": "+1 (555) 123-4567",
+    "whatsapp": "+15551234567",
+    "address": "123 Creative Lane, Studio City, CA 90210",
+    "hours": {
+      "monday": "10:00 - 18:00",
+      "tuesday": "10:00 - 18:00",
+      "wednesday": "10:00 - 18:00",
+      "thursday": "10:00 - 18:00",
+      "friday": "10:00 - 18:00",
+      "saturday": "12:00 - 17:00",
+      "sunday": "Closed"
+    },
+    "social": {
+      "instagram": "https://instagram.com/luminastudio",
+      "facebook": "https://facebook.com/luminastudio",
+      "linkedin": "https://linkedin.com/company/luminastudio"
+    }
+  },
+  "theme": {
+    "accentPrimary": "#a855f7",
+    "accentSecondary": "#06b6d4",
+    "dark": "#0f172a",
+    "light": "#f8fafc",
+    "fontDisplay": "Poppins",
+    "fontBody": "Inter"
+  },
+  "hero": {
+    "headline": "Capture Your Story",
+    "subheadline": "Premium photography for moments that matter",
+    "ctaPrimary": "Book a Session",
+    "ctaSecondary": "View Portfolio"
+  },
+  "services": [
+    {
+      "id": 1,
+      "name": "Portrait Sessions",
+      "description": "Timeless portraits that reveal character and elegance. Perfect for professionals, families, and personal branding.",
+      "price": "$299",
+      "icon": "portrait"
+    },
+    {
+      "id": 2,
+      "name": "Event Coverage",
+      "description": "Full-day or half-day coverage for weddings, corporate events, and celebrations. Edited gallery delivered within 2 weeks.",
+      "price": "$1,200+",
+      "icon": "event"
+    },
+    {
+      "id": 3,
+      "name": "Product Photography",
+      "description": "Studio or on-location shots for e-commerce, portfolios, and marketing materials. Includes styling and lighting consultation.",
+      "price": "$499",
+      "icon": "product"
+    }
+  ],
+  "howItWorks": [
+    {
+      "step": 1,
+      "title": "Inquiry",
+      "description": "Tell us about your vision. We'll discuss your needs, style preferences, and logistics."
+    },
+    {
+      "step": 2,
+      "title": "Planning",
+      "description": "We create a detailed shot list and mood board. Location scouting and styling consultation included."
+    },
+    {
+      "step": 3,
+      "title": "Delivery",
+      "description": "Professionally edited gallery delivered in your preferred format. Prints and albums available."
+    }
+  ],
+  "faq": [
+    {
+      "id": 1,
+      "question": "What is your turnaround time for edited photos?",
+      "answer": "For portrait sessions, edited photos are delivered within 5 business days. Event galleries take 10\u201314 days. Rush delivery available upon request."
+    },
+    {
+      "id": 2,
+      "question": "Do you offer retouching and editing?",
+      "answer": "Yes, all sessions include professional retouching. Color grading, skin tone adjustment, and background enhancement are standard."
+    },
+    {
+      "id": 3,
+      "question": "Can I purchase prints or albums?",
+      "answer": "Absolutely. We offer high-quality prints, canvases, and luxury albums. Pricing available upon request."
+    },
+    {
+      "id": 4,
+      "question": "What's your cancellation policy?",
+      "answer": "Cancellations made 7+ days in advance receive a full refund. Within 7 days, a 50% refund is issued. No-shows forfeit the full fee."
+    },
+    {
+      "id": 5,
+      "question": "Do you offer package deals?",
+      "answer": "Yes, we offer discounts for multiple sessions and volume orders. Contact us for custom pricing."
+    }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Sarah Chen",
+      "role": "Bride",
+      "message": "LUMINA captured every precious moment of our wedding day. The photos are absolutely stunning and timeless.",
+      "approved": true
+    },
+    {
+      "id": 2,
+      "name": "Marcus Johnson",
+      "role": "Founder, TechStart Co.",
+      "message": "Professional, creative, and easy to work with. The product shots took our marketing to the next level.",
+      "approved": true
+    },
+    {
+      "id": 3,
+      "name": "Elena Rodriguez",
+      "role": "Artist",
+      "message": "A portrait session with LUMINA was transformative. They saw me in a way I didn't see myself. Highly recommended.",
+      "approved": true
+    }
+  ],
+  "seo": {
+    "siteName": "LUMINA Photography Studio",
+    "siteDescription": "Premium photography studio specializing in portraits, events, and product photography. Based in Studio City, California.",
+    "keywords": "photography, portraits, events, product photography, studio photography",
+    "socialImage": "/static/images/og-image.svg"
+  },
+  "admin_login": {
+    "badge": "Secure admin area",
+    "headline_1": "Manage your business",
+    "headline_2": "in one place",
+    "h1": "Welcome Admin!",
+    "sub": "<b>Sign in</b> to manage enquiries and content.",
+    "email_placeholder": "admin@lumina.com",
+    "password_placeholder": "Password",
+    "button_label": "Sign in",
+    "divider_label": "OR",
+    "secondary_label": "Back to website",
+    "footer_text": "Authorised administrators only."
+  },
+  "cinematic": {
+    "sights_source": "config",
+    "assets_mode": "remote",
+    "font_mode": "remote",
+    "title_mode": "front",
+    "title_scale": 1.0,
+    "assets": {
+      "font": "https://dcym8fthxf5uu.cloudfront.net/fonts/247a073c-29f5-4a89-aa3a-741020f346fc/OggText-Medium.woff2",
+      "sky": "https://raft-blast-61784561.figma.site/_assets/v11/16b5007d9c93971e26ffe4e0e3e37946f6bd538c.png",
+      "back_four": "https://raft-blast-61784561.figma.site/_assets/v11/8a7f8af50e0ce92ec2e228e7b0b4112178c51cf1.png",
+      "bazaar": "https://raft-blast-61784561.figma.site/_assets/v11/864afe00e41e2fa20a5aa546e15cb807e0f81384.png",
+      "split_left": "https://raft-blast-61784561.figma.site/_assets/v11/7536d7b60a1fce482cf6edf3f0bffd3bad5d0f8a.png",
+      "split_right": "https://raft-blast-61784561.figma.site/_assets/v11/392db6a6a6b98e868bd7f8d3f55bb719d51e5028.png",
+      "bridge": "https://raft-blast-61784561.figma.site/_assets/v11/c6a6d8ef49bca43f708aa852692942c45ec950d4.png",
+      "frame_two": "https://raft-blast-61784561.figma.site/_assets/v11/ba75252bab2b1c510987b74837770f7bc8a6b2d4.png",
+      "icon1": "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260730_230438_d526b8b6-8a2e-4e3b-9993-3908acae03a7.png",
+      "icon2": "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260730_230442_140bc25b-b165-4249-904a-f708bff6970e.png",
+      "icon3": "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260730_230448_825949c9-ccdb-4857-b4a6-e349eccc9010.png"
+    },
+    "hero_title": "LUMINA",
+    "nav_logo": "LUMINA // VISUAL STUDIO",
+    "intro_p": "Light, craft, and memory. Premium photography and visual storytelling tailored to capture your most cherished moments with elegance.",
+    "hero_tags": [
+      "Portrait Sessions",
+      "Event Coverage",
+      "Product Studio"
+    ],
+    "bridge_panel": {
+      "h2": "Every frame is a curated moment.",
+      "p": "We blend technical precision with artistic vision to deliver timeless elegance and stunning galleries in every project.",
+      "facts": [
+        {
+          "dt": "100%",
+          "dd": "Hand-edited gallery"
+        },
+        {
+          "dt": "2 Wks",
+          "dd": "Standard delivery time"
+        }
+      ]
+    },
+    "bazaar_panel": {
+      "h2": "Your vision, flawlessly executed.",
+      "p": "From intimate portraits to grand celebrations, our studio preserves your story with sophistication and care.",
+      "note_button_label": "Book a Session"
+    },
+    "sights": [
+      {
+        "aria": "Open Signature Portraits card",
+        "kicker": "Portrait",
+        "h3": "Signature Portraits",
+        "p": "Timeless elegance and character-driven portraiture for individuals and brands.",
+        "icon": "icon1"
+      },
+      {
+        "aria": "Open Event Coverage card",
+        "kicker": "Event",
+        "h3": "Event Coverage",
+        "p": "Full-day and half-day capture for weddings, milestones, and celebrations.",
+        "icon": "icon2"
+      },
+      {
+        "aria": "Open Product Studio card",
+        "kicker": "Commercial",
+        "h3": "Product Studio",
+        "p": "High-end commercial and product photography designed to elevate your brand.",
+        "icon": "icon3"
+      },
+      {
+        "aria": "Open Art Direction card",
+        "kicker": "Process",
+        "h3": "Art Direction",
+        "p": "Custom mood boards, location scouting, and professional styling consultation.",
+        "icon": "icon1"
+      },
+      {
+        "aria": "Open Digital Delivery card",
+        "kicker": "Gallery",
+        "h3": "Digital & Print",
+        "p": "High-resolution professionally graded galleries with luxury print options.",
+        "icon": "icon2"
+      }
+    ]
+  }
+}

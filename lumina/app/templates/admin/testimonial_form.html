@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} — Admin{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+
+<section class="container" style="padding-top: 80px; padding-bottom: 100px;">
+    <div class="admin-header">
+        <div>
+            <h1>{{ title }}</h1>
+            <div class="breadcrumb">
+                <a href="{{ url_for('admin.dashboard') }}">Dashboard</a> /
+                <a href="{{ url_for('admin.testimonials_list') }}">Testimonials</a> /
+                <span>{{ title }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-form" style="max-width: 600px;">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group-admin">
+                {{ form.name.label }}
+                {{ form.name(class="form-control") }}
+                {% if form.name.errors %}
+                    <span style="color: #fca5a5; font-size: 0.85rem; margin-top: 0.3rem; display: block;">{{ form.name.errors[0] }}</span>
+                {% endif %}
+            </div>
+
+            <div class="form-group-admin">
+                {{ form.role.label }}
+                {{ form.role(class="form-control") }}
+                {% if form.role.errors %}
+                    <span style="color: #fca5a5; font-size: 0.85rem; margin-top: 0.3rem; display: block;">{{ form.role.errors[0] }}</span>
+                {% endif %}
+            </div>
+
+            <div class="form-group-admin">
+                {{ form.message.label }}
+                {{ form.message(rows=5, class="form-control") }}
+                {% if form.message.errors %}
+                    <span style="color: #fca5a5; font-size: 0.85rem; margin-top: 0.3rem; display: block;">{{ form.message.errors[0] }}</span>
+                {% endif %}
+            </div>
+
+            <div class="form-group-admin">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    {{ form.approved(style="margin: 0;") }}
+                    <span>{{ form.approved.label.text }}</span>
+                </label>
+            </div>
+
+            <div class="form-actions">
+                {{ form.submit(class="btn btn-primary") }}
+                <a href="{{ url_for('admin.testimonials_list') }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

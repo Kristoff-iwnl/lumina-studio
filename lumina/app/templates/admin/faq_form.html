@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} — Admin{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+
+<section class="container" style="padding-top: 80px; padding-bottom: 100px;">
+    <div class="admin-header">
+        <div>
+            <h1>{{ title }}</h1>
+            <div class="breadcrumb">
+                <a href="{{ url_for('admin.dashboard') }}">Dashboard</a> /
+                <a href="{{ url_for('admin.faq_list') }}">FAQ</a> /
+                <span>{{ title }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-form" style="max-width: 600px;">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group-admin">
+                {{ form.question.label }}
+                {{ form.question(class="form-control") }}
+                {% if form.question.errors %}
+                    <span style="color: #fca5a5; font-size: 0.85rem; margin-top: 0.3rem; display: block;">{{ form.question.errors[0] }}</span>
+                {% endif %}
+            </div>
+
+            <div class="form-group-admin">
+                {{ form.answer.label }}
+                {{ form.answer(rows=5, class="form-control") }}
+                {% if form.answer.errors %}
+                    <span style="color: #fca5a5; font-size: 0.85rem; margin-top: 0.3rem; display: block;">{{ form.answer.errors[0] }}</span>
+                {% endif %}
+            </div>
+
+            <div class="form-actions">
+                {{ form.submit(class="btn btn-primary") }}
+                <a href="{{ url_for('admin.faq_list') }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

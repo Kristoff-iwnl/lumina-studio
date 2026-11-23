@@ -1,0 +1,13 @@
+html[data-perf="lite"] {
+  --blur-px: 0px !important;
+  --bazaar-blur-px: 0px !important;
+}
+
+html[data-perf="lite"] .back-four {
+  mix-blend-mode: normal !important;
+}
+
+html[data-perf="lite"] .scene-img,
+html[data-perf="lite"] .back-img {
+  filter: none !important;
+}

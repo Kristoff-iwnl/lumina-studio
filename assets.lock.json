@@ -1,0 +1,57 @@
+{
+  "font": {
+    "url": "https://dcym8fthxf5uu.cloudfront.net/fonts/247a073c-29f5-4a89-aa3a-741020f346fc/OggText-Medium.woff2",
+    "local_path": "assets_src\\OggText-Medium.woff2",
+    "sha256": "b57d1cbbd6d456d35e421161bfbb614f1903dded2b4c27de26d75ebf5a448702"
+  },
+  "sky": {
+    "url": "https://raft-blast-61784561.figma.site/_assets/v11/16b5007d9c93971e26ffe4e0e3e37946f6bd538c.png",
+    "local_path": "assets_src\\16b5007d9c93971e26ffe4e0e3e37946f6bd538c.png",
+    "sha256": "c20b8f159bee9df608f358c0304b44ed8f883a86f352156031a9be117048ba62"
+  },
+  "back_four": {
+    "url": "https://raft-blast-61784561.figma.site/_assets/v11/8a7f8af50e0ce92ec2e228e7b0b4112178c51cf1.png",
+    "local_path": "assets_src\\8a7f8af50e0ce92ec2e228e7b0b4112178c51cf1.png",
+    "sha256": "ca0ffa77f6d95c8dd3ec2268d0273ed0539f12a5909bd8e96804713e3a3a634e"
+  },
+  "bazaar": {
+    "url": "https://raft-blast-61784561.figma.site/_assets/v11/864afe00e41e2fa20a5aa546e15cb807e0f81384.png",
+    "local_path": "assets_src\\864afe00e41e2fa20a5aa546e15cb807e0f81384.png",
+    "sha256": "7e3cf1b4ca771d60fe1c172ac703fa0f9da37ad527e6794c6f3bc2c0f40d3c5d"
+  },
+  "split_left": {
+    "url": "https://raft-blast-61784561.figma.site/_assets/v11/7536d7b60a1fce482cf6edf3f0bffd3bad5d0f8a.png",
+    "local_path": "assets_src\\7536d7b60a1fce482cf6edf3f0bffd3bad5d0f8a.png",
+    "sha256": "d0e33857ed66e09902ac80a0659a57696eb93290809461b1ee9816f684c41193"
+  },
+  "split_right": {
+    "url": "https://raft-blast-61784561.figma.site/_assets/v11/392db6a6a6b98e868bd7f8d3f55bb719d51e5028.png",
+    "local_path": "assets_src\\392db6a6a6b98e868bd7f8d3f55bb719d51e5028.png",
+    "sha256": "8c1599cb5248c7515ba72d62025f948090002e1e71d7c102614c28fddeb8f377"
+  },
+  "bridge": {
+    "url": "https://raft-blast-61784561.figma.site/_assets/v11/c6a6d8ef49bca43f708aa852692942c45ec950d4.png",
+    "local_path": "assets_src\\c6a6d8ef49bca43f708aa852692942c45ec950d4.png",
+    "sha256": "eacce24f7dda1e6167548858a139342b71254dc4823e93bed34964dd86f7d93f"
+  },
+  "frame_two": {
+    "url": "https://raft-blast-61784561.figma.site/_assets/v11/ba75252bab2b1c510987b74837770f7bc8a6b2d4.png",
+    "local_path": "assets_src\\ba75252bab2b1c510987b74837770f7bc8a6b2d4.png",
+    "sha256": "55a8674299e45d5fdd02fb45b7a46a59bfdca35ae52f74c71a4f6680260bcf9e"
+  },
+  "icon1": {
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260730_230438_d526b8b6-8a2e-4e3b-9993-3908acae03a7.png",
+    "local_path": "assets_src\\hf_20260730_230438_d526b8b6-8a2e-4e3b-9993-3908acae03a7.png",
+    "sha256": "919ce72da4411f5c473b9539a86f4062fbfa55e75e6c9901785487f274d15089"
+  },
+  "icon2": {
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260730_230442_140bc25b-b165-4249-904a-f708bff6970e.png",
+    "local_path": "assets_src\\hf_20260730_230442_140bc25b-b165-4249-904a-f708bff6970e.png",
+    "sha256": "9abc3b3a56a819ece1fbcecaab51703b0483024247e71f69a0e202ab6fc18036"
+  },
+  "icon3": {
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260730_230448_825949c9-ccdb-4857-b4a6-e349eccc9010.png",
+    "local_path": "assets_src\\hf_20260730_230448_825949c9-ccdb-4857-b4a6-e349eccc9010.png",
+    "sha256": "dff0aee515d4f3d1d68d9f4f3b18327e43c60958d7a4daca1cf65fe9b0c6cfe1"
+  }
+}

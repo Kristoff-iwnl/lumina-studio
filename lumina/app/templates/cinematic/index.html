@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ config.get('cinematic', {}).get('hero_title', 'Mostar city') }}</title>
+    <meta name="description" content="{{ config.get('seo', {}).get('siteDescription', 'A cinematic three-screen scroll story for Mostar city.') }}">
+
+    <!-- Preconnect for remote assets -->
+    <link rel="preconnect" href="https://raft-blast-61784561.figma.site">
+    <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net">
+    <link rel="preconnect" href="https://dcym8fthxf5uu.cloudfront.net">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='cinematic/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='cinematic/below.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='cinematic/lite.css') }}">
+    {% if config.get('cinematic', {}).get('title_mode', 'front') != 'behind' %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='cinematic/fixes.css') }}">
+    {% endif %}
+    <link rel="icon" href="data:,">
+</head>
+<body>
+    <main class="site-shell">
+        <section class="cinema-scroll" id="cinema" aria-label="Mostar cinematic scroll story" data-title-mode="{{ config.get('cinematic', {}).get('title_mode', 'front') }}" style="--title-scale: {{ config.get('cinematic', {}).get('title_scale', 1.0) }};">
+            <div class="stage">
+                <div class="world">
+                    <!-- Sky -->
+                    <img class="scene-img sky-img" src="{{ config.get('cinematic', {}).get('assets', {}).get('sky', 'https://raft-blast-61784561.figma.site/_assets/v11/16b5007d9c93971e26ffe4e0e3e37946f6bd538c.png') }}" alt="">
+
+                    <!-- Header -->
+                    <header class="site-header" aria-label="Primary navigation">
+                        <a class="site-logo" href="#cinema">{{ config.get('cinematic', {}).get('nav_logo', 'Bosnia and Herzegovina') }}</a>
+                        <nav class="site-nav" aria-label="Main menu">
+                            <a href="#cinema">Intro</a>
+                            <a href="#bridge">Bridge</a>
+                            <a href="#bazaar">Studio</a>
+                            <a href="#routes">Gallery</a>
+                            <a href="#enquiry">Contact</a>
+                        </nav>
+                        <button class="language-switcher" aria-label="Change language" aria-disabled="true">
+                            <span>EN</span>
+                            <span aria-hidden="true">⌄</span>
+                        </button>
+                    </header>
+
+                    <!-- Back Stack -->
+                    <div class="back-stack">
+                        <img class="scene-img back-img back-four" src="{{ config.get('cinematic', {}).get('assets', {}).get('back_four', 'https://raft-blast-61784561.figma.site/_assets/v11/8a7f8af50e0ce92ec2e228e7b0b4112178c51cf1.png') }}" alt="">
+
+                        <!-- Sights Slider -->
+                        <section class="sights-slider" aria-label="Mostar sights slider">
+                            <div class="sights-track">
+                                {% for sight in config.get('cinematic', {}).get('sights', []) %}
+                                <article class="sight-card" tabindex="0" role="button" aria-label="{{ sight.aria }}">
+                                    <span class="sight-kicker">{{ sight.kicker }}</span>
+                                    <img class="sight-pin" src="{{ config.get('cinematic', {}).get('assets', {}).get(sight.icon, config.get('cinematic', {}).get('assets', {}).get('icon1')) }}" alt="">
+                                    <h3>{{ sight.h3 }}</h3>
+                                    <p>{{ sight.p }}</p>
+                                </article>
+                                {% endfor %}
+                            </div>
+                        </section>
+
+                        <img class="scene-img back-img back-bazaar" src="{{ config.get('cinematic', {}).get('assets', {}).get('bazaar', 'https://raft-blast-61784561.figma.site/_assets/v11/864afe00e41e2fa20a5aa546e15cb807e0f81384.png') }}" alt="">
+                    </div>
+
+                    <!-- Sights Controls -->
+                    <div class="sights-controls" aria-label="Slider controls">
+                        <button class="sight-nav sight-prev" aria-label="Previous sight">←</button>
+                        <button class="sight-nav sight-next" aria-label="Next sight">→</button>
+                    </div>
+
+                    <!-- Hero Title -->
+                    <h1 class="hero-title">{{ config.get('cinematic', {}).get('hero_title', 'MOSTAR') }}</h1>
+
+                    <!-- Splitframe -->
+                    <img class="scene-img splitframe-img splitframe-left" src="{{ config.get('cinematic', {}).get('assets', {}).get('split_left', 'https://raft-blast-61784561.figma.site/_assets/v11/7536d7b60a1fce482cf6edf3f0bffd3bad5d0f8a.png') }}" alt="">
+                    <img class="scene-img splitframe-img splitframe-right" src="{{ config.get('cinematic', {}).get('assets', {}).get('split_right', 'https://raft-blast-61784561.figma.site/_assets/v11/392db6a6a6b98e868bd7f8d3f55bb719d51e5028.png') }}" alt="">
+
+                    <!-- Bridge Foreground -->
+                    <img class="scene-img bridge-img" src="{{ config.get('cinematic', {}).get('assets', {}).get('bridge', 'https://raft-blast-61784561.figma.site/_assets/v11/c6a6d8ef49bca43f708aa852692942c45ec950d4.png') }}" alt="">
+
+                    <!-- Frame Two River Close-up -->
+                    <img class="scene-img frame-two-img" src="{{ config.get('cinematic', {}).get('assets', {}).get('frame_two', 'https://raft-blast-61784561.figma.site/_assets/v11/ba75252bab2b1c510987b74837770f7bc8a6b2d4.png') }}" alt="">
+
+                    <!-- Shade Gradient -->
+                    <div class="shade"></div>
+                </div>
+
+                <!-- Intro Copy -->
+                <section class="intro-copy" aria-label="Mostar overview">
+                    <p>{{ config.get('cinematic', {}).get('intro_p', 'A stone arch, emerald water, and a compact old city made for slow mornings, late light, and one unforgettable crossing.') }}</p>
+                    <div class="hero-tags" aria-label="Mostar highlights">
+                        {% for tag in config.get('cinematic', {}).get('hero_tags', []) %}
+                        <span>{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!-- Story Panel Bridge -->
+                <section class="story-panel story-panel-bridge" aria-label="Old Bridge details" id="bridge-panel">
+                    <h2>{{ config.get('cinematic', {}).get('bridge_panel', {}).get('h2', "The bridge is the city's compass.") }}</h2>
+                    <p>{{ config.get('cinematic', {}).get('bridge_panel', {}).get('p', "Stari Most links the banks of the Neretva and anchors a historic quarter shaped by Ottoman, Mediterranean, and European layers.") }}</p>
+                    <dl class="facts">
+                        {% for fact in config.get('cinematic', {}).get('bridge_panel', {}).get('facts', []) %}
+                        <div>
+                            <dt>{{ fact.dt }}</dt>
+                            <dd>{{ fact.dd }}</dd>
+                        </div>
+                        {% endfor %}
+                    </dl>
+                </section>
+
+                <!-- Story Panel Bazaar -->
+                <section class="story-panel story-panel-bazaar" aria-label="Old town details" id="bazaar-panel">
+                    <h2>{{ config.get('cinematic', {}).get('bazaar_panel', {}).get('h2', "The bazaar keeps Mostar close.") }}</h2>
+                    <p>{{ config.get('cinematic', {}).get('bazaar_panel', {}).get('p', "Stone lanes, mosque courtyards, copper stalls, and riverside coffee stay within a short walk of Stari Most.") }}</p>
+                    <button class="note-button">
+                        <span aria-hidden="true">↗</span>
+                        <span>{{ config.get('cinematic', {}).get('bazaar_panel', {}).get('note_button_label', 'Open old town notes') }}</span>
+                    </button>
+                </section>
+            </div>
+        </section>
+
+        <!-- Sections Below The Cinema -->
+        <div class="below-sections">
+            <div class="below-container">
+
+                <!-- Services / Offerings -->
+                <h2 class="section-heading" id="services">Our Services</h2>
+                <p class="section-subheading">Professional photography and creative production tailored to your vision.</p>
+                <div class="services-grid">
+                    {% for service in services %}
+                    <div class="service-card">
+                        <h3>{{ service.name }}</h3>
+                        <p>{{ service.description }}</p>
+                        <div class="service-price">{{ service.price or '—' }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Enquiry / Contact Form -->
+                <div class="enquiry-section" id="enquiry">
+                    <h2 class="section-heading" style="text-align: left; margin-bottom: 1rem;">Get in Touch</h2>
+                    <p style="margin-bottom: 2.5rem; color: #555;">Ready to book your session or inquire about custom packages? Send us a message below.</p>
+
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}" style="padding: 15px; margin-bottom: 20px; border-radius: 8px; background: {% if category == 'success' %}#d4edda{% else %}#f8d7da{% endif %}; color: {% if category == 'success' %}#155724{% else %}#721c24{% endif %};">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <form method="POST" action="{{ url_for('public.index') }}#enquiry">
+                        {{ form.hidden_tag() }}
+
+                        <!-- Honeypot (hidden from real users, bots fill it) -->
+                        <div style="display:none;" aria-hidden="true">
+                            <label for="website_hp">Leave this field blank</label>
+                            <input type="text" id="website_hp" name="website_hp" value="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            {{ form.name(class="form-control", placeholder="Jane Doe") }}
+                            {% for error in form.name.errors %}
+                                <span style="color: red; font-size: 0.85rem;">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            {{ form.email(class="form-control", placeholder="jane@example.com") }}
+                            {% for error in form.email.errors %}
+                                <span style="color: red; font-size: 0.85rem;">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number (Optional)</label>
+                            {{ form.phone(class="form-control", placeholder="+1 (555) 000-0000") }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Service Interested In</label>
+                            {{ form.service(class="form-control") }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            {{ form.message(class="form-control", rows="5", placeholder="Tell us about your project or vision...") }}
+                            {% for error in form.message.errors %}
+                                <span style="color: red; font-size: 0.85rem;">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <button type="submit" class="btn-primary-cream">Send Enquiry</button>
+                    </form>
+                </div>
+
+                <!-- FAQ Section -->
+                <h2 class="section-heading" id="faq">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    {% for item in faq %}
+                    <div class="faq-item">
+                        <div class="faq-question">{{ item.question }}</div>
+                        <div class="faq-answer">{{ item.answer }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Testimonials Section -->
+                {% if testimonials %}
+                <h2 class="section-heading">What Clients Say</h2>
+                <div class="testimonials-grid">
+                    {% for t in testimonials %}
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"{{ t.message }}"</div>
+                        <div class="testimonial-author">{{ t.name }}</div>
+                        <div class="testimonial-role">{{ t.role }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer-below">
+            <div class="below-container">
+                <p>&copy; 2026 {{ config.get('business', {}).get('name', 'LUMINA') }}. All rights reserved. | <a href="{{ url_for('public.privacy') }}">Privacy Policy</a> | <a href="{{ url_for('auth.login', variant='signal') }}">Admin Login</a></p>
+            </div>
+        </footer>
+    </main>
+
+    {% if engine == 'optimized' %}
+    <script src="{{ url_for('static', filename='cinematic/opt/engine.js') }}" defer></script>
+    {% else %}
+    <script src="{{ url_for('static', filename='cinematic/script.js') }}" defer></script>
+    {% endif %}
+    <script src="{{ url_for('static', filename='cinematic/nav-anchors.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='cinematic/perf-guard.js') }}" defer></script>
+</body>
+</html>

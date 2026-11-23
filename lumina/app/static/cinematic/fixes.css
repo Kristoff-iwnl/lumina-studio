@@ -1,0 +1,22 @@
+/* Companion Brief 3: Hero Title Visibility Fixes */
+
+/* Mode: front (Default) - Places title above bridge (4) and below splitframe (6) */
+.cinema-scroll[data-title-mode="front"] .hero-title,
+.cinema-scroll:not([data-title-mode]) .hero-title {
+  z-index: 5 !important;
+  text-shadow: 0 4px 32px rgba(0, 0, 0, 0.32), 0 1px 4px rgba(0, 0, 0, 0.4);
+  font-size: calc(14rem * var(--title-scale, 1));
+}
+
+/* Mode: fit - Keeps title behind bridge but repositions & scales for >=85% visibility */
+.cinema-scroll[data-title-mode="fit"] .hero-title {
+  z-index: 3;
+  top: clamp(84px, 13vh, 150px);
+  font-size: calc(clamp(6rem, 10vw, 12rem) * var(--title-scale, 1));
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Global title scale support for long titles (12+ chars) */
+.hero-title {
+  font-size: calc(14rem * var(--title-scale, 1));
+}

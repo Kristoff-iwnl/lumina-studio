@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block title %}{{ config.get('business', {}).get('name', 'LUMINA') }} — {{ config.get('business', {}).get('tagline', '') }}{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section id="home" class="hero">
+    <video autoplay muted loop playsinline preload="auto" class="hero-bg-video">
+        <source src="{{ url_for('static', filename='videos/aurora-bg.mp4') }}" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>{{ config.get('hero', {}).get('headline', 'Welcome') }}</h1>
+        <p>{{ config.get('hero', {}).get('subheadline', '') }}</p>
+        <a href="#enquiry" class="cta-button">{{ config.get('hero', {}).get('ctaPrimary', 'Get Started') }}</a>
+        <a href="#services" class="btn btn-secondary" style="margin-left: 15px;">{{ config.get('hero', {}).get('ctaSecondary', 'Learn More') }}</a>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const video = document.querySelector('.hero-bg-video');
+    if (video) {
+        video.play().catch(e => console.log("Video play error:", e));
+    }
+});
+</script>
+
+<!-- SERVICES SECTION -->
+<section id="services" class="container" aria-labelledby="services-heading">
+    <h2 id="services-heading">Our Services</h2>
+    <div class="services-grid" role="region" aria-label="Services offered">
+        {% for service in services %}
+        <article class="card service-card">
+            <h3>{{ service.name }}</h3>
+            <p>{{ service.description }}</p>
+            {% if service.price %}
+                <p style="color: var(--accent-secondary); font-weight: 600; margin-top: 1rem;">Price: {{ service.price }}</p>
+            {% endif %}
+            <ul class="service-list" aria-label="{{ service.name }} features">
+                {% if service.name == "Portrait Sessions" %}
+                    <li>Professional headshots</li>
+                    <li>Family portraits</li>
+                    <li>Personal branding</li>
+                    <li>Custom styling</li>
+                {% elif service.name == "Event Coverage" %}
+                    <li>Full-day coverage</li>
+                    <li>Multi-photographer teams</li>
+                    <li>Quick turnaround</li>
+                    <li>Album options</li>
+                {% elif service.name == "Product Photography" %}
+                    <li>Studio lighting</li>
+                    <li>Lifestyle shots</li>
+                    <li>E-commerce ready</li>
+                    <li>Post-processing included</li>
+                {% endif %}
+            </ul>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="container" aria-labelledby="howitworks-heading">
+    <h2 id="howitworks-heading">How It Works</h2>
+    <div class="services-grid" role="region" aria-label="Process steps" style="margin-top: 3rem;">
+        {% for step in config.get('howItWorks', []) %}
+        <article class="card" style="text-align: center;">
+            <div style="font-size: 2rem; color: var(--accent-secondary); margin-bottom: 1rem; font-weight: 700;" aria-label="Step {{ step.step }}">{{ step.step }}</div>
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.description }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- TESTIMONIALS SECTION -->
+{% if testimonials %}
+<section class="container" aria-labelledby="testimonials-heading">
+    <h2 id="testimonials-heading">What Our Clients Say</h2>
+    <div class="testimonials-grid" role="region" aria-label="Customer testimonials">
+        {% for testimonial in testimonials %}
+        <article class="card testimonial">
+            <blockquote>
+                <p class="testimonial-message">{{ testimonial.message }}</p>
+            </blockquote>
+            <div class="testimonial-author">— {{ testimonial.name }}</div>
+            <div class="testimonial-role">{{ testimonial.role }}</div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- FAQ SECTION -->
+{% if faqs %}
+<section id="faq" class="container" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+    <div class="faq-list" role="region" aria-label="Frequently asked questions">
+        {% for item in faqs %}
+        <details class="card" id="faq-{{ item.id }}">
+            <summary tabindex="0">{{ item.question }}</summary>
+            <p id="faq-answer-{{ item.id }}">{{ item.answer }}</p>
+        </details>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- ENQUIRY FORM SECTION -->
+<section id="enquiry" class="container" aria-labelledby="contact-heading">
+    <h2 id="contact-heading">Get In Touch</h2>
+    <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Have questions? Ready to book? We'd love to hear from you.</p>
+
+    <form id="contactForm" method="POST" action="{{ url_for('public.submit_enquiry') }}" class="enquiry-form" aria-label="Contact form" novalidate>
+        {{ form.hidden_tag() }}
+        <input type="hidden" name="timestamp" value="{{ now.isoformat() if now else '' }}">
+        <input type="hidden" name="website" style="display: none;" aria-hidden="true">
+
+        <div class="form-group">
+            {{ form.name.label }}
+            {{ form.name(size=32, required=True, aria_describedby="name-error" if form.name.errors else None) }}
+            {% if form.name.errors %}
+                {% for error in form.name.errors %}
+                    <span class="error-message" id="name-error" role="alert">{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label }}
+            {{ form.email(size=32, required=True, aria_describedby="email-error" if form.email.errors else None) }}
+            {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                    <span class="error-message" id="email-error" role="alert">{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.phone.label }}
+            {{ form.phone(size=32, aria_describedby="phone-error" if form.phone.errors else None) }}
+            {% if form.phone.errors %}
+                {% for error in form.phone.errors %}
+                    <span class="error-message" id="phone-error" role="alert">{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.service.label }}
+            {{ form.service(aria_describedby="service-error" if form.service.errors else None) }}
+            {% if form.service.errors %}
+                {% for error in form.service.errors %}
+                    <span class="error-message" id="service-error" role="alert">{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.preferred_date.label }}
+            {{ form.preferred_date(type="date") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.message.label }}
+            {{ form.message(rows=5, required=True, aria_describedby="message-error" if form.message.errors else None) }}
+            {% if form.message.errors %}
+                {% for error in form.message.errors %}
+                    <span class="error-message" id="message-error" role="alert">{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        {{ form.submit(class="submit-button", aria_label="Submit contact form") }}
+        <div id="formNote" class="form-note" role="status" aria-live="polite"></div>
+    </form>
+</section>
+
+{% endblock %}
+

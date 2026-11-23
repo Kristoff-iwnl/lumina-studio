@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard — {{ config.get('business', {}).get('name', 'LUMINA') }}{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+
+<div class="capitalio-dashboard">
+    <!-- Header Section -->
+    <div class="dashboard-header-banner">
+        <div>
+            <div class="badge-pill">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span>Live Operations & Enquiries</span>
+            </div>
+            <h1>Welcome Admin!</h1>
+            <p>Monitor real-time client enquiries, service performance, and studio workflows.</p>
+        </div>
+        <div class="dashboard-actions">
+            <a href="{{ url_for('admin.enquiries_list') }}" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Manage Enquiries
+            </a>
+            <a href="{{ url_for('admin.services_list') }}" class="btn btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                Manage Services
+            </a>
+        </div>
+    </div>
+
+    <!-- Capitalio Stats Grid -->
+    <div class="capitalio-stats-grid">
+        <div class="capitalio-stat-card">
+            <div class="stat-top">
+                <span class="stat-title">New Enquiries</span>
+                <div class="stat-icon-badge purple">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+            </div>
+            <div class="stat-number-row">
+                <span class="stat-value">{{ enquiry_counts.new }}</span>
+                <span class="stat-trend positive">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+                    +18%
+                </span>
+            </div>
+            <div class="stat-footer">Requires immediate review</div>
+        </div>
+
+        <div class="capitalio-stat-card">
+            <div class="stat-top">
+                <span class="stat-title">Contacted</span>
+                <div class="stat-icon-badge cyan">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+            </div>
+            <div class="stat-number-row">
+                <span class="stat-value">{{ enquiry_counts.contacted }}</span>
+                <span class="stat-trend positive">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+                    +8%
+                </span>
+            </div>
+            <div class="stat-footer">In active discussion</div>
+        </div>
+
+        <div class="capitalio-stat-card">
+            <div class="stat-top">
+                <span class="stat-title">Completed</span>
+                <div class="stat-icon-badge green">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+            </div>
+            <div class="stat-number-row">
+                <span class="stat-value">{{ enquiry_counts.done }}</span>
+                <span class="stat-trend positive">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+                    +24%
+                </span>
+            </div>
+            <div class="stat-footer">Successfully delivered</div>
+        </div>
+
+        <div class="capitalio-stat-card">
+            <div class="stat-top">
+                <span class="stat-title">Flagged / Spam</span>
+                <div class="stat-icon-badge red">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                </div>
+            </div>
+            <div class="stat-number-row">
+                <span class="stat-value">{{ enquiry_counts.spam }}</span>
+                <span class="stat-trend neutral">0%</span>
+            </div>
+            <div class="stat-footer">Filtered automatically</div>
+        </div>
+    </div>
+
+    <!-- Recent Enquiries Section -->
+    <div class="capitalio-panel">
+        <div class="panel-header">
+            <div>
+                <h2>Recent Client Enquiries</h2>
+                <p>Latest submissions from prospective photography clients.</p>
+            </div>
+            <a href="{{ url_for('admin.enquiries_list') }}" class="btn-text">View All →</a>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Client Name</th>
+                        <th>Contact Info</th>
+                        <th>Requested Service</th>
+                        <th>Status</th>
+                        <th>Submitted At</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for enquiry in recent_enquiries %}
+                    <tr>
+                        <td>
+                            <div class="client-cell">
+                                <div class="client-avatar">{{ enquiry.name[:2].upper() }}</div>
+                                <strong>{{ enquiry.name }}</strong>
+                            </div>
+                        </td>
+                        <td>
+                            {% if enquiry.email %}
+                                <a href="mailto:{{ enquiry.email }}" class="link-sub">{{ enquiry.email }}</a>
+                            {% elif enquiry.phone %}
+                                <a href="tel:{{ enquiry.phone }}" class="link-sub">{{ enquiry.phone }}</a>
+                            {% endif %}
+                        </td>
+                        <td><span class="service-pill">{{ enquiry.service or 'General Inquiry' }}</span></td>
+                        <td><span class="badge badge-{{ enquiry.status }}">{{ enquiry.status }}</span></td>
+                        <td><span class="date-text">{{ enquiry.created_at.strftime('%b %d, %Y %H:%M') }}</span></td>
+                        <td>
+                            <a href="{{ url_for('admin.view_enquiry', enquiry_id=enquiry.id) }}" class="btn-edit btn-sm">Review</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 40px; color: var(--text-muted);">No enquiries received yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Management Quick Links Grid -->
+    <div class="capitalio-panel" style="margin-top: 2.5rem;">
+        <div class="panel-header">
+            <div>
+                <h2>Studio Management Hub</h2>
+                <p>Quick access to content modules and configuration settings.</p>
+            </div>
+        </div>
+
+        <div class="hub-grid">
+            <a href="{{ url_for('admin.enquiries_list') }}" class="hub-card">
+                <div class="hub-icon purple">📋</div>
+                <h3>Enquiries Hub</h3>
+                <p>Review customer submissions, update statuses, and export CSV reports.</p>
+                <span class="hub-link">Open Hub →</span>
+            </a>
+            <a href="{{ url_for('admin.services_list') }}" class="hub-card">
+                <div class="hub-icon cyan">🎯</div>
+                <h3>Services Portfolio</h3>
+                <p>Add, edit, or reorder photography packages and pricing.</p>
+                <span class="hub-link">Manage Services →</span>
+            </a>
+            <a href="{{ url_for('admin.faq_list') }}" class="hub-card">
+                <div class="hub-icon green">❓</div>
+                <h3>Knowledge Base / FAQ</h3>
+                <p>Keep client answers clear, accurate, and up to date.</p>
+                <span class="hub-link">Edit FAQs →</span>
+            </a>
+            <a href="{{ url_for('admin.testimonials_list') }}" class="hub-card">
+                <div class="hub-icon amber">⭐</div>
+                <h3>Testimonials & Reviews</h3>
+                <p>Approve and feature glowing client feedback on the studio frontend.</p>
+                <span class="hub-link">Curate Reviews →</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
