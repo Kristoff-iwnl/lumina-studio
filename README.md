@@ -153,9 +153,13 @@ Additional deployment and maintenance guides are available in the `docs/` direct
 lumina-studio/
 ├── docs/
 │   ├── gallery/
-│   ├── home.png
+│   ├── homepage.png
 │   ├── admin-dashboard.png
-│   └── deployment guides
+│   ├── BACKUP.md
+│   ├── DEPLOY_PYTHONANYWHERE.md
+│   ├── DEPLOY_RENDER.md
+│   ├── PRE_DEPLOY_CHECKLIST.md
+│   └── SECRET_SCAN.md
 ├── lumina/
 │   ├── app/
 │   ├── config/
@@ -163,7 +167,10 @@ lumina-studio/
 │   ├── migrations/
 │   ├── tests/
 │   ├── requirements.txt
+│   ├── requirements-dev.txt
 │   └── wsgi.py
+├── .env.example
+├── .gitignore
 └── README.md
 ```
 
