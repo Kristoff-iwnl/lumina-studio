@@ -1,14 +1,12 @@
-# Reversion Guide for LUMINA Admin Login Signal Redesign
+# Reversion Guide for LUMINA Deployment Prep
 
-To revert the admin login back to the classic variant:
+To revert to the pre-deployment state (baseline before production preparation):
 
-1. **Environment Configuration:**
-   Set `ADMIN_LOGIN_VARIANT=classic` in your environment or `.env` file, or update `config/config.py` / `config/site.json` so that `ADMIN_LOGIN_VARIANT` defaults to `"classic"`.
-
-2. **Query Parameter override:**
-   You can also test classic mode directly at any time by visiting `/auth/login?variant=classic`.
-
-3. **Git Reversion (if git is initialized):**
+1. **Git Reversion:**
    ```bash
-   git checkout v4-before-admin-login
+   git checkout v5-before-deploy-prep
    ```
+
+2. **Variant Reversion:**
+   - Classic public variant: visit `/classic` or set `FRONTEND_VARIANT=classic`.
+   - Classic admin login: visit `/auth/login?variant=classic` or set `ADMIN_LOGIN_VARIANT=classic`.

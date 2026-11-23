@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.env.*
+instance/
+*.db
+*.sqlite*
+.git/
+.gitignore
+backups/
+assets_src/
+playwright-report/
+test-results/
+.pytest_cache/
+docs/

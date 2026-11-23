@@ -20,7 +20,7 @@ class Config:
     PERMANENT_SESSION_LIFETIME = 8 * 60 * 60  # 8 hours
 
     # Rate limiting
-    RATELIMIT_STORAGE_URL = os.environ.get("RATELIMIT_STORAGE_URL") or "memory://"
+    RATELIMIT_STORAGE_URL = os.environ.get("RATELIMIT_STORAGE_URI") or os.environ.get("RATELIMIT_STORAGE_URL") or "memory://"
 
     # Email (optional, off by default)
     MAIL_SERVER = os.environ.get("MAIL_SERVER")
@@ -30,11 +30,13 @@ class Config:
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     MAIL_DEFAULT_SENDER = os.environ.get("MAIL_DEFAULT_SENDER", "noreply@lumina.studio")
 
-    # Site config path
+    # Site config path & URL
     SITE_CONFIG_PATH = BASE_DIR / "config" / "site.json"
     INSTANCE_PATH = BASE_DIR / "instance"
     FRONTEND_VARIANT = "cinematic"
     ADMIN_LOGIN_VARIANT = "signal"
+    SITE_URL = os.environ.get("SITE_URL", "http://127.0.0.1:5000")
+    TRUSTED_PROXY_COUNT = int(os.environ.get("TRUSTED_PROXY_COUNT", "1"))
 
 class Development(Config):
     """Development configuration."""
@@ -53,9 +55,11 @@ class Production(Config):
     DEBUG = False
     TESTING = False
     SESSION_COOKIE_SECURE = True
+    PREFERRED_URL_SCHEME = "https"
 
 # Select config based on environment
-env = os.environ.get("FLASK_ENV", "development").lower()
+app_env = os.environ.get("APP_ENV") or os.environ.get("FLASK_ENV", "development")
+env = app_env.lower()
 if env == "testing":
     config = Testing()
 elif env == "production":

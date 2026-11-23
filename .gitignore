@@ -1,10 +1,47 @@
-backups/
-.venv/
-venv/
-instance/
+# Python
 __pycache__/
-.pytest_cache/
-.DS_Store
 *.pyc
 *.pyo
+*.pyd
+.venv/
+venv/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Environment & Secrets
 .env
+.env.*
+!.env.example
+
+# Database & Instance
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs & Temporary
+*.log
+logs/
+tmp/
+backups/
+
+# Assets Source & Test Artifacts
+assets_src/
+playwright-report/
+test-results/
+.angular/
+dist/
+build/
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

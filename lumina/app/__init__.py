@@ -7,6 +7,7 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_login import LoginManager
 from dotenv import load_dotenv
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from config.config import config
 from app.models import db, Admin
@@ -27,6 +28,18 @@ def create_app(config_obj=None):
     if config_obj is None:
         config_obj = config
     app.config.from_object(config_obj)
+
+    # Production safety checks for SECRET_KEY
+    app_env = os.environ.get("APP_ENV") or os.environ.get("FLASK_ENV", "development")
+    if app_env.lower() == "production" or getattr(config_obj, "DEBUG", True) is False:
+        secret_key = app.config.get("SECRET_KEY")
+        if not secret_key or len(secret_key) < 32 or secret_key == "dev-key-change-in-production":
+            raise RuntimeError("CRITICAL: Production mode requires a secure SECRET_KEY of at least 32 characters!")
+
+    # ProxyFix middleware
+    trusted_proxies = app.config.get("TRUSTED_PROXY_COUNT", 1)
+    if trusted_proxies > 0 and app_env.lower() == "production":
+        app.wsgi_app = ProxyFix(app.wsgi_app, x_for=trusted_proxies, x_proto=trusted_proxies, x_host=trusted_proxies, x_prefix=trusted_proxies)
 
     # Ensure instance folder exists
     Path(app.config["INSTANCE_PATH"]).mkdir(exist_ok=True)
@@ -68,6 +81,11 @@ def create_app(config_obj=None):
         from flask import redirect, url_for
         return redirect(url_for("auth.login"))
 
+    # Health check route (no DB touch)
+    @app.route("/healthz")
+    def healthz():
+        return "OK", 200, {"Content-Type": "text/plain"}
+
     # Error handlers
     @app.errorhandler(404)
     def not_found(_):
@@ -75,7 +93,6 @@ def create_app(config_obj=None):
 
     @app.after_request
     def set_security_headers(response):
-        import os
         frontend_variant = os.environ.get("FRONTEND_VARIANT") or current_app.config.get("FRONTEND_VARIANT", "cinematic")
         is_cinematic = request.path.startswith("/cinematic") or request.path.startswith("/auth/login") or (request.path == "/" and frontend_variant.lower() == "cinematic")
         if is_cinematic:
@@ -99,6 +116,12 @@ def create_app(config_obj=None):
                 "connect-src 'self';"
             )
         response.headers["Content-Security-Policy"] = csp
+
+        # HSTS in production over HTTPS
+        app_env = os.environ.get("APP_ENV") or os.environ.get("FLASK_ENV", "development")
+        if app_env.lower() == "production":
+            response.headers["Strict-Transport-Security"] = "max-age=300"
+
         return response
 
     # CLI commands
